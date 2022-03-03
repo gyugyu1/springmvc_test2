@@ -21,5 +21,30 @@ public class CodeController {
 		return "code/codeGroupList";
 	}
 	
-
+	@RequestMapping(value = "/code/codeGroupForm")
+	public String codeGroupForm() throws Exception {
+		return "code/codeGroupForm";
+	}
+	
+	@RequestMapping(value = "/code/codeGroupInst")
+	public String codeGroupInst(Code dto) throws Exception {
+		System.out.println();
+		
+		service.insert(dto);
+		
+		return "";
+	}
+	
+	
+	@RequestMapping(value = "/code/codeGroupView")
+	public String codeGroupvIew(CodeVo vo, Model model) throws Exception {
+		System.out.println("vo.getIfcgSeq():" + vo.getIfcgSeq());
+		
+		Code rt = service.selectOne(vo);
+		
+		model.addAttribute("item",rt);
+		
+		
+		return "code/codeGroupView";
+	}
 }

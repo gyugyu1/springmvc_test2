@@ -11,10 +11,12 @@ import org.springframework.stereotype.Repository;
 public class CodeDao {
 	
 	@Inject
-//	@Resource(name = "sqlSession")
+	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
 	private static String namespace = "com.junefw.infra.modules.code.CodeMpp";
 
     public List<Code> selectList() { return sqlSession.selectList(namespace + ".selectList","");}
+    public int insert() {return sqlSession.insert(namespace +".insert", "");}
+    public Code selectOne(CodeVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo);}
 }
