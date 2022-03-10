@@ -14,8 +14,14 @@
 	<c:otherwise>
 		<c:forEach items="${list}" var="item" varStatus="status">	
 		
-		<c:out value="${item.ifmmSeq}"/> | <c:out value="${item.ifmmId}"/> | <c:out value="${item.ifmmName}"/> <br>
+		<a href = "/infra/member/memberView?ifmmSeq=<c:out value="${item.ifmmSeq}"/>">
+		<c:out value="${item.ifmmSeq}"/></a> | 
+		<c:out value="${item.ifmmId}"/> | 
+		<c:out value="${item.ifmmName}"/> <br>
 		
 		</c:forEach>
+		
+		<a href=/infra/member/memberForm>멤버등록</a>
+
 	</c:otherwise>
 </c:choose>	

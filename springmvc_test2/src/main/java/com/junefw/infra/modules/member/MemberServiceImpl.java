@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.junefw.infra.modules.code.CodeVo;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -18,6 +20,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int insert(Member dto) throws Exception {
 		return dao.insert(dto);
+	}
+	@Override
+	public Member selectOne(MemberVo vo) throws Exception {
+		return dao.selectOne(vo);
+	}
+	@Override
+	public int update(Member dto) throws Exception {
+		return dao.update(dto);
+		
 	}
 	
 }

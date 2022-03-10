@@ -7,7 +7,7 @@
 <mapper namespace="com.junefw.infra.modules.code.CodeMpp"> <!-- 지금파일지칭 -->
 
 	<resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!-- 결과객체지칭 -->
-
+	<!-- infrCodeGroup -->
 	<select id="selectList" resultMap="resultMapObj">
 		select
 			a.ifcgSeq
@@ -31,14 +31,64 @@
 	</insert>
 	
 		<select id="selectOne" resultMap="resultMapObj">
-		select
+		SELECT
 			a.ifcgSeq
 		    , a.ifcgName
 		    , a.ifcgDelNy
-		from
-			ifCodeGroup a
-		where 1=1
-			and ifcgDelNy = 0
-			and ifcgSeq = #{mvcgSeq}
+		FROM
+			infrCodeGroup a
+		WHERE 1=1
+			and ifcgSeq = #{ifcgSeq}
 	</select>
+	
+	<update id="update">
+		UPDATE infrCodeGroup SET 
+			ifcgName= #{ifcgName}
+		WHERE 1=1
+			AND ifcgSeq =#{ifcgSeq}
+	</update>
+	
+	<!-- infrCode  -->
+	
+	<select id="selectListCode" resultMap="resultMapObj">
+		select
+			a.ifcdSeq
+			,a.ifcdName
+			,a.ifcdDelNy
+		FROM 
+			infrCode a
+		WHERE 1=1
+			AND a.ifcdDelNy =0
+	</select>
+
+	<insert id="insertCode">
+		INSERT INTO infrCode(
+		ifcdName
+		,ifcdDelNy
+		,ifcgSeq
+		) VALUES (
+		#{ifcdName}
+		,0
+		,#{ifcgSeq}
+		)
+		
+	</insert>
+	
+		<select id="selectOneCode" resultMap="resultMapObj">
+		SELECT
+			a.ifcdSeq
+		    , a.ifcdName
+		    , a.ifcdDelNy
+		FROM
+			infrCode a
+		WHERE 1=1
+			and a.ifcdSeq = #{ifcdSeq}
+	</select>
+	
+	<update id="updateCode">
+		UPDATE infrCode SET 
+			ifcdName= #{ifcdName}
+		WHERE 1=1
+			AND ifcdSeq =#{ifcdSeq}
+	</update>
 </mapper>
