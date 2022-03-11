@@ -16,7 +16,14 @@
 		FROM 
 			infrCodeGroup as a
 		WHERE 1=1
-			AND ifcgDelNy =0
+		<choose>
+			<when test="shIifcgDelNy==1">AND ifcgDelNy =1</when>
+			<when test="shIifcgDelNy==0">AND ifcgDelNy =0</when>
+		</choose>
+			
+			<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%') </if>
+			<!-- <if test="shIifgSeq != null and !shIifgSeq.equals('')"> AND ifcgSeq =#{shIifgSeq} </if> -->
+			
 	</select>
 
 	<insert id="insert">
@@ -59,6 +66,7 @@
 			infrCode a
 		WHERE 1=1
 			AND a.ifcdDelNy =0
+			<if test="shIifgSeq != null and !shIifgSeq.equals('')"> AND ifcgSeq =#{shIifgSeq} </if>
 	</select>
 
 	<insert id="insertCode">
