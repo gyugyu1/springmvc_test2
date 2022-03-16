@@ -5,10 +5,19 @@ public class Code {
 	private String ifcgSeq;
 	private String ifcgName;
 	private Integer ifcgDelNy;
+	private String ifcgNameEng;
+	
 	
 	private String ifcdSeq;
 	private String ifcdName;
 	private String ifcdDelNy;
+	
+	public String getIfcgNameEng() {
+		return ifcgNameEng;
+	}
+	public void setIfcgNameEng(String ifcgNameEng) {
+		this.ifcgNameEng = ifcgNameEng;
+	}
 	
 	public String getIfcdSeq() {
 		return ifcdSeq;

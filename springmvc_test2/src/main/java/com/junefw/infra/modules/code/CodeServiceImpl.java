@@ -11,6 +11,13 @@ public class CodeServiceImpl implements CodeService{
 	@Autowired
 	CodeDao dao;
 //infrCodeGroup
+	
+	@Override
+	public int selectOneCount(CodeVo vo) throws Exception {
+		return dao.selectOneCount(vo);
+		
+	}
+	
 	@Override
 	public List<Code> selectList(CodeVo vo) throws Exception {
 		return dao.selectList(vo);
@@ -53,7 +60,19 @@ public class CodeServiceImpl implements CodeService{
 	public int updateCode(Code dto) throws Exception {
 		return dao.updateCode(dto);
 	}
-	
+
+	@Override
+	public int selectOneCountCode(CodeVo vo) throws Exception {
+		return dao.selectOneCountCode(vo);
+		
+	}
+
+	@Override
+	public List<Code> selectListC(CodeVo vo) throws Exception {
+		
+		return dao.selectListC(vo);
+	}
+
 	
 	
 }

@@ -6,7 +6,14 @@ public class Member {
 	private String ifmmId;
 	private String ifmmName;
 	private Integer ifmmDelNy;
-//------------
+	private String ifmpNumber;
+public String getIfmpNumber() {
+		return ifmpNumber;
+	}
+	public void setIfmpNumber(String ifmpNumber) {
+		this.ifmpNumber = ifmpNumber;
+	}
+	//------------
 	public String getIfmmSeq() {
 		return ifmmSeq;
 	}

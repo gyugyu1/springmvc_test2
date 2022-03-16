@@ -9,12 +9,19 @@
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.member.Member"></resultMap>
 
 	<select id="selectList" resultMap="resultMapObj">
-			select
-				ifmmSeq
-				, ifmmId
-				, ifmmName
-			from
-				infrMember
+			SELECT
+				a.ifmmSeq
+				, a.ifmmId
+				, a.ifmmName
+				, b.ifmpNumber
+			FROM
+				infrMember a LEFT JOIN infrmemberphone b ON a.ifmmSeq = b.ifmmSeq
+			WHERE 1=1
+				<!-- <if test="seValue != null and !seMember.equals('')"> AND a.ifmmName LIKE concat('%',#{seValue},'%');</if> -->
+				<choose>
+					<when test ="seOp==1"> AND a.IfmmName LIKE concat('%',#{seValue},'%') </when>
+					<when test ="seOp==2"> AND b.IfmpNumber LIKE concat('%',#{seValue},'%') </when>
+				</choose>
 	</select>
 	
 	<insert id="insert">

@@ -8,22 +8,47 @@
 
 	<resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!-- 결과객체지칭 -->
 	<!-- infrCodeGroup -->
+	
+	<sql id="selectCommon">
+		FROM
+			infrCodeGroup as a
+		WHERE 1=1
+		<choose>
+			<when test="shIifcgDelNy==1">AND a.ifcgDelNy =1</when>
+			<when test="shIifcgDelNy==0">AND a.ifcgDelNy =0</when>
+		</choose>
+			
+			<if test="shIfcgName != null and !shIfcgName.equals('')"> AND a.ifcgName LIKE concat('%',#{shIfcgName},'%') </if>
+		<choose>
+			<when test="shOption==1">AND a.ifcgName LIKE concat('%',#{shValue},'%')</when>
+			<when test="shOption==2">AND a.ifcgNameEng LIKE concat('%',#{shValue},'%')</when>
+		</choose>
+	</sql>
+	
+	<select id="selectOneCount" resultType="Integer">
+		SELECT 
+			count(*)
+		<include refid="selectCommon"/>
+	</select>
+	
 	<select id="selectList" resultMap="resultMapObj">
 		select
 			a.ifcgSeq
 			,a.ifcgName
+			,a.ifcgNameEng
 			,a.ifcgDelNy
-		FROM 
-			infrCodeGroup as a
-		WHERE 1=1
-		<choose>
-			<when test="shIifcgDelNy==1">AND ifcgDelNy =1</when>
-			<when test="shIifcgDelNy==0">AND ifcgDelNy =0</when>
-		</choose>
+		<include refid="selectCommon"/>
+		limit #{startRnumForMysql}, #{rowNumToShow}
 			
-			<if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName},'%') </if>
-			<!-- <if test="shIifgSeq != null and !shIifgSeq.equals('')"> AND ifcgSeq =#{shIifgSeq} </if> -->
-			
+	</select>
+	
+	<select id="selectListC" resultMap="resultMapObj">
+		select
+			a.ifcgSeq
+			,a.ifcgName
+			,a.ifcgNameEng
+			,a.ifcgDelNy
+		<include refid="selectCommon"/>
 	</select>
 
 	<insert id="insert">
@@ -56,19 +81,34 @@
 	</update>
 	
 	<!-- infrCode  -->
+	<sql id="selectCommonCode">
+			FROM 
+			infrCode c
+		WHERE 1=1
+			AND c.ifcdDelNy =0
+			<if test="shIifgSeq != null and !shIifgSeq.equals('')"> AND ifcgSeq =#{shIifgSeq} </if>
+	</sql>
+	
+	
 	
 	<select id="selectListCode" resultMap="resultMapObj">
 		select
-			a.ifcdSeq
-			,a.ifcdName
-			,a.ifcdDelNy
-		FROM 
-			infrCode a
-		WHERE 1=1
-			AND a.ifcdDelNy =0
-			<if test="shIifgSeq != null and !shIifgSeq.equals('')"> AND ifcgSeq =#{shIifgSeq} </if>
+			c.ifcdSeq
+			,c.ifcdName
+			,c.ifcdDelNy
+		<include refid="selectCommonCode"/>
+		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
-
+	
+	
+	<select id="selectOneCountCode" resultType="Integer">
+		SELECT
+			count(*)
+	<include refid="selectCommonCode"/>
+	</select>
+		
+		
+		
 	<insert id="insertCode">
 		INSERT INTO infrCode(
 		ifcdName

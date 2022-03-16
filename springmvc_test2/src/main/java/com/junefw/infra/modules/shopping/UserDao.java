@@ -1,4 +1,4 @@
-package com.junefw.infra.modules.member;
+package com.junefw.infra.modules.shopping;
 
 import java.util.List;
 
@@ -10,27 +10,27 @@ import org.springframework.stereotype.Repository;
 import com.junefw.infra.modules.code.Code;
 
 @Repository
-public class MemberDao {
+public class UserDao {
 	
 	@Inject
 //	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
 	
-	private static String namespace = "com.junefw.infra.modules.member.MemberMpp";
+	private static String namespace = "com.junefw.infra.modules.shopping.UserMpp";
 
-	public List<Member> selectList(MemberVo vo){ 
+	public List<User> selectList(UserVo vo){ 
 		return sqlSession.selectList(namespace + ".selectList", vo);
 	}
 
-	public int insert(Member dto){ 
+	public int insert(User dto){ 
 		return sqlSession.insert(namespace + ".insert", dto);
 	}
 	
-	public Member selectOne(MemberVo vo){ 
+	public User selectOne(UserVo vo){ 
 		return sqlSession.selectOne(namespace + ".selectOne", vo);
 	}
 	
-	public int update(Member dto) {
+	public int update(User dto) {
 		return sqlSession.update(namespace +".update", dto);
 		}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junefw.infra.modules.shopping.UserMpp">
+
+    <resultMap id="resultMapObj" type="com.junefw.infra.modules.shopping.User"></resultMap>
+
+	<select id="selectList" resultMap="resultMapObj">
+			SELECT
+				id,
+				name,
+				phoneNumber,
+				userId,
+				password,
+				emailFull
+				registeredAt		
+			FROM
+				user 
+			WHERE 1=1
+	</select>
+	
+	
+
+</mapper>

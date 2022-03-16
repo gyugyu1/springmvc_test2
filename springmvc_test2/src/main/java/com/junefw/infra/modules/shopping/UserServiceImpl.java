@@ -1,4 +1,4 @@
-package com.junefw.infra.modules.member;
+package com.junefw.infra.modules.shopping;
 
 import java.util.List;
 
@@ -8,25 +8,25 @@ import org.springframework.stereotype.Service;
 import com.junefw.infra.modules.code.CodeVo;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class UserServiceImpl implements UserService{
 
 	@Autowired
-	MemberDao dao;
+	UserDao dao;
 	
 	@Override
-	public List<Member> selectList(MemberVo vo) throws Exception {
+	public List<User> selectList(UserVo vo) throws Exception {
 		return dao.selectList(vo); 
 	}
 	@Override
-	public int insert(Member dto) throws Exception {
+	public int insert(User dto) throws Exception {
 		return dao.insert(dto);
 	}
 	@Override
-	public Member selectOne(MemberVo vo) throws Exception {
+	public User selectOne(UserVo vo) throws Exception {
 		return dao.selectOne(vo);
 	}
 	@Override
-	public int update(Member dto) throws Exception {
+	public int update(User dto) throws Exception {
 		return dao.update(dto);
 		
 	}
