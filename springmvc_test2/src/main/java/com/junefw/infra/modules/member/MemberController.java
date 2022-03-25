@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.junefw.infra.modules.code.Code;
+import com.junefw.infra.modules.code.CodeServiceImpl;
 import com.junefw.infra.modules.code.CodeVo;
 
 @Controller
@@ -28,7 +29,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/memberForm")
 	public String memberForm(Model model) throws Exception {
-
+		model.addAttribute("codeGender",CodeServiceImpl.selectListCachedCode("2"));
+		model.addAttribute("codeTelecom",CodeServiceImpl.selectListCachedCode("10"));
+		
 		return "member/memberForm";
 	}
 	

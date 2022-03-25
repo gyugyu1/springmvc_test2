@@ -38,6 +38,7 @@
 			,a.ifcgNameEng
 			,a.ifcgDelNy
 		<include refid="selectCommon"/>
+		ORDER BY a.ifcgSeq DESC
 		limit #{startRnumForMysql}, #{rowNumToShow}
 			
 	</select>
@@ -59,7 +60,9 @@
 		#{ifcgName}
 		,0
 		)
-		
+		<selectKey resultType="String" keyProperty="ifcgSeq" order="AFTER">
+			SELECT last_insert_id();
+		</selectKey>
 	</insert>
 	
 		<select id="selectOne" resultMap="resultMapObj">
@@ -99,7 +102,19 @@
 		<include refid="selectCommonCode"/>
 		limit #{startRnumForMysql}, #{rowNumToShow}
 	</select>
-	
+
+
+	<select id="selectListForCache" resultMap="resultMapObj">
+		select
+			ifcdSeq
+			,ifcdName
+			,ifcdDelNy
+			,ifcgSeq
+		FROM infrCode
+		WHERE 1=1
+			AND ifcdDelNy = 0
+			AND ifcdUseNy = 1
+	</select>
 	
 	<select id="selectOneCountCode" resultType="Integer">
 		SELECT
@@ -138,5 +153,19 @@
 			ifcdName= #{ifcdName}
 		WHERE 1=1
 			AND ifcdSeq =#{ifcdSeq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM infrCodeGroup
+		WHERE 1=1
+		AND ifcgSeq =#{ifcgSeq}
+	</delete>
+
+	<update id="updateDelete">
+		UPDATE
+		infrCodeGroup
+		 SET ifcgDelNy = 1
+		WHERE 1=1
+			AND ifcgSeq =#{ifcgSeq}
 	</update>
 </mapper>

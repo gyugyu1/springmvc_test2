@@ -5,7 +5,7 @@
 //jquery형 함수
 checkNull = function(obj, v, message) {
 			if(v == "" || v ==null){
-			alert("validation : " + message);
+			alert(message);
 			obj.focus();
 			return false;
 		}else {

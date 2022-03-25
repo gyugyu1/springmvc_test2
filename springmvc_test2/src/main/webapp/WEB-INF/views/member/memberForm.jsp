@@ -9,5 +9,11 @@
 <form method="post" action="/infra/member/memberInst">
 	<input type="text" name="ifmmId" placeholder="아이디">
 	<input type="text" name="ifmmName" placeholder="이름">
+	<select class="form-select form-select-sm" id="kbmmGenderCd" name="kbmmGenderCd">
+		<option value="">::성별::</option>
+			<c:forEach items="${codeGender}" var="itemGender" varStatus="statusGender">
+		<option value="<c:out value="${itemGender.ifcdSeq}"/>"><c:out value="${itemGender.ifcdName}"/></option>	
+			</c:forEach>
+	</select>
 	<input type="submit" value="제출">
 </form>

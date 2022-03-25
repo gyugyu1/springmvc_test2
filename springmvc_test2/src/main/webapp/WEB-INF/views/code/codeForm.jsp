@@ -16,5 +16,6 @@
 	</select> 
 	<input type="text" name="ifcdName" placeholder="아이디" value="<c:out value="${item.ifcdName}"/>"> 
 	<input type="submit" value="제출">
+	
 
 </form>

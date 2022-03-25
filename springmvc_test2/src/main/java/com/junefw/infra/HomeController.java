@@ -36,4 +36,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/sampleKaKaoMap")
+	public String sampleKaKaoMap() {
+
+		
+		return "/test/map";
+	}
+	
 }

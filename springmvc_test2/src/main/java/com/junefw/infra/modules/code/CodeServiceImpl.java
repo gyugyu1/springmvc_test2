@@ -1,6 +1,9 @@
 package com.junefw.infra.modules.code;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +28,9 @@ public class CodeServiceImpl implements CodeService{
 
 	@Override
 	public int insert(Code dto) throws Exception {
-		return dao.insert(dto);
+		 dao.insert(dto);
+		 dao.insertCode(dto);
+		return 1;
 	}
 	
 	@Override
@@ -37,6 +42,18 @@ public class CodeServiceImpl implements CodeService{
 	public int update(Code dto) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.update(dto);
+	}
+	
+	@Override
+	public int delete(CodeVo vo) throws Exception {
+		
+		return dao.delete(vo);
+	}
+
+	@Override
+	public int deleteUpdate(CodeVo vo) throws Exception {
+
+		return dao.updateDelete(vo);
 	}
 
 	
@@ -73,6 +90,24 @@ public class CodeServiceImpl implements CodeService{
 		return dao.selectListC(vo);
 	}
 
+	@PostConstruct
+	public void selectListForCache(){
+		List<Code> codeListFromDb = (ArrayList<Code>) dao.selectListForCache();
+		Code.cachedCodeArrayList.clear();
+		Code.cachedCodeArrayList.addAll(codeListFromDb);
+		System.out.println("캐시가올라갔습니다.");
+
+	}
 	
+	public static List<Code> selectListCachedCode(String ifcgSeq) throws Exception{
+		List<Code> rt = new ArrayList<Code>();
+		for(Code codeRow : Code.cachedCodeArrayList) {
+			if(codeRow.getIfcgSeq().equals(ifcgSeq)) {
+				rt.add(codeRow);				
+			}else {
+				
+			}
+		} return rt;
+	}
 	
 }

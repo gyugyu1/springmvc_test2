@@ -9,6 +9,8 @@ public interface CodeService {
 	 int insert(Code dto) throws Exception;
 	 Code selectOne(CodeVo vo) throws Exception;
 	 int update(Code dto) throws Exception;
+	 int delete(CodeVo vo) throws Exception;
+	 int deleteUpdate(CodeVo vo) throws Exception;
 	
 //infrCode
 	 int selectOneCountCode(CodeVo vo) throws Exception;
